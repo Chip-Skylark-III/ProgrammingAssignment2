@@ -2,6 +2,8 @@
 ## functions do
 
 
+## This function allows to store the inverse of a matrix to the 
+## cache, but needs the function below to calculate the value one time first.
 makeCacheMatrix <- function(x = matrix()) {
       inv <- NULL
       set <- function(y){
@@ -16,6 +18,9 @@ makeCacheMatrix <- function(x = matrix()) {
             getinverse = getinverse)
 }
 
+## This function first checks if the inverse of the matrix 
+## has already been calculated. If so, it takes the value from 
+## the cache. Otherwise it calculates the value with solve function.
 cacheSolve <- function(x, ...) {
       inv <- x$getinverse()
       if(!is.null(inv)) { 
@@ -23,7 +28,7 @@ cacheSolve <- function(x, ...) {
           return(inv)
       }
       data <- x$get()
-      inv <- inverse(data, ...)
+      inv <- solve(data, ...)
       x$setinverse(inv)
       inv
 }
